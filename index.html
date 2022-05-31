@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diamon converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Diamon Converter</h1>
+      <div class="row">
+        <div class="col">
+          <label for="coin">Diamon</label>
+          <input type="string" class="form-control" placeholder="0" id="coin" onchange="diamon(this.value)" />
+        </div>
+        <div class="col">
+          <label for="rupiah">Rupiah</label>
+          <input type="string" class="form-control" placeholder="xxx xxx" id="rupiah" disabled />
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+      const diamon = (value) => {
+        let inputCoin = document.getElementById("coin");
+        let outRupiah = document.getElementById("rupiah");
+        inputCoin.value = value;
+
+        const fixedPrice = 500;
+        let diamon = value * fixedPrice;
+        console.log("diamon bernilai", diamon);
+
+        let price = String(diamon).split("").reverse();
+        console.log("original price =>", price);
+        for (let i = 0; i < price.length; i++) {
+          if ((i + 1) % 3 == 0 && i !== price.length - 1) {
+            price[i] = `.${price[i]}`;
+          }
+        }
+        console.log("finishing price=>", price);
+
+        const totalPrice = price.reverse().join("");
+        console.log("total price=>", totalPrice);
+
+        if (inputCoin != "") {
+          outRupiah.value = `Rp. ${totalPrice}, 00`;
+        } else {
+          outRupiah.value = "";
+        }
+      };
+    </script>
+  </body>
+</html>
